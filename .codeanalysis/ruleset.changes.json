@@ -1,0 +1,38 @@
+{
+    "name": "AC Financial Pack",
+    "description": "Rules",
+    "rules": [
+        {
+            "id": "AA0072",
+            "action":"Warning"
+        },
+        {
+            "id": "AA0218",
+            "action":"None"
+        },
+        {
+            "id": "AL0605",
+            "action":"Warning"
+        },
+        {
+            "id":"AS0051",
+            "action":"None"
+        },
+        {
+            "id":"AS0052",
+            "action":"None"
+        },
+        {
+            "id":"AS0053",
+            "action":"None"
+        },
+        {
+            "id":"AS0084",
+            "action":"None"
+        },
+        {
+            "id":"AS0092",
+            "action":"None"
+        }
+    ]
+}

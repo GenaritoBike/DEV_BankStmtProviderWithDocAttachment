@@ -1,0 +1,44 @@
+{
+  "id": "f85b5b1a-5367-4ab2-a263-d839638fe43a",
+  "name": "DEV_BankStmtProviderWithDocAttachment",
+  "publisher": "Milos Zavrel",
+  "version": "21.2.49946.0",
+  "brief": "DEV_BankStmtProviderWithDocAttachment",
+  "description": "DEV_BankStmtProviderWithDocAttachment",
+  "logo": "./Empty.png",
+  "screenshots": [],
+  "platform": "21.0.0.0",
+  "features": ["TranslationFile"],
+  "supportedLocales": [ "en-US", "cs-CZ" ],
+  "dependencies": [
+    {
+      "id": "8730dafb-13cd-42c9-987c-decb6354269d",
+      "publisher": "Microsoft",
+      "name": "Banking Documents Localization for Czech",
+      "version": "21.0.0.0"
+    },
+    {
+      "id": "a4718ec9-49e7-4f2c-bf8e-668fde14ef13",
+      "publisher": "AUTOCONT a.s.",
+      "name": "AC Financial Pack",
+      "version": "21.0.0.0"
+    }
+  ],
+  "contextSensitiveHelpUrl": "http://www.google.com",
+  "idRanges": [
+    {
+      "from": 60301,
+      "to": 60310
+    }
+  ],
+  "preprocessorSymbols": [
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": true,
+    "allowDownloadingSource": false,
+    "includeSourceInSymbolFile": false
+  },
+  "target": "Cloud",
+  "application": "21.0.0.0",
+  "runtime": "10.1"
+}
