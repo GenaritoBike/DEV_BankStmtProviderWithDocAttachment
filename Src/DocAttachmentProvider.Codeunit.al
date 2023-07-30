@@ -19,7 +19,7 @@ codeunit 60301 "Doc. Attachment Provider Pte" implements "Bank Statement Provide
         DocumentAttachment.SetFilter("No.", BankStmtImportSetupAcb.Code);
         if DocumentAttachment.FindSet() then
             repeat
-                if not DocumentAttachment."Document Reference ID".HasValue() then begin
+                if DocumentAttachment."Document Reference ID".HasValue() then begin
                     Clear(TempNewBankStmtImportRequestAcb);
 
                     TempNewBankStmtImportRequestAcb.Init();
