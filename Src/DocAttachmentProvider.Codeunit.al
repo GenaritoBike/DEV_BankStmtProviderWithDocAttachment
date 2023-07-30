@@ -12,8 +12,10 @@ codeunit 60301 "Doc. Attachment Provider Pte" implements "Bank Statement Provide
         TempNewBankStmtImportRequestAcb: Record "Bank Stmt. Import Request Acb" temporary;
         OutStream: OutStream;
     begin
+        // Detekce a načtení nových streamů z webové služby
         GetNewFilesFromWebService(BankStmtImportSetupAcb);
 
+        // vracím streamy
         DocumentAttachment.Reset();
         DocumentAttachment.SetRange("Table ID", Database::"Bank Stmt. Import Setup Acb");
         DocumentAttachment.SetFilter("No.", BankStmtImportSetupAcb.Code);
@@ -56,6 +58,7 @@ codeunit 60301 "Doc. Attachment Provider Pte" implements "Bank Statement Provide
         InStream: InStream;
         FileName: Text[250];
     begin
+        // Tady jen test v podobě získání nového streamu (z lokálního úložiště)
         if UploadFile(BankStmtImportSetupAcb, InStream, FileName) then begin
             SaveStreamToDocumentAttachment(BankStmtImportSetupAcb, FileName, InStream);
             Commit();
@@ -79,6 +82,12 @@ codeunit 60301 "Doc. Attachment Provider Pte" implements "Bank Statement Provide
             ContentDescription := CopyStr(FileName, 1, MaxStrLen(ContentDescription));
     end;
 
+    /// <summary>
+    /// Uložení streamu do Document Attachment
+    /// </summary>
+    /// <param name="BankStmtImportSetupAcb"></param>
+    /// <param name="ContentDescription"></param>
+    /// <param name="InStream"></param>
     local procedure SaveStreamToDocumentAttachment(BankStmtImportSetupAcb: Record "Bank Stmt. Import Setup Acb"; ContentDescription: Text[250]; InStream: InStream)
     var
         DocumentAttachment: Record "Document Attachment";
@@ -90,9 +99,16 @@ codeunit 60301 "Doc. Attachment Provider Pte" implements "Bank Statement Provide
         Clear(DocumentAttachment);
         DocumentAttachment.InitFieldsFromRecRef(RecordRef);
 
+        // V názvu souboru můžou být případně další pomocné identifikace z webové služby,
+        // aby nebylo nutné vytvářet v Document Attachment nová pole a šlo třeba lépe předfiltrovávat to,
+        // co bude vracet poskytovatel bankovních výpisů z funkcí SelectBankStatements a GetBankStatements.
+
         FileName := DocumentAttachment.FindUniqueFileName(
             FileManagement.GetFileNameWithoutExtension(ContentDescription),
             FileManagement.GetExtension(ContentDescription));
+
+        // zde může být místo získávání jedinečného názvu souboru (neopakujícího se) kontrola na duplicitu názvu souboru a 
+        // v případě duplicity se dokument nebude připojovat. Viz DocumentAttachmentMgmt.IsDuplicateFile()
 
         DocumentAttachment.SaveAttachmentFromStream(InStream, RecordRef, FileName);
     end;
