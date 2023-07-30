@@ -164,7 +164,7 @@ codeunit 60301 "Doc. Attachment Provider Pte" implements "Bank Statement Provide
     end;
 
     [EventSubscriber(ObjectType::Table, Database::"Bank Stmt. Import Setup Acb", 'OnAfterDeleteEvent', '', false, false)]
-    local procedure DeleteAttachedDocumentsOnAfterDeleteBankStatementHeaderCZB(var Rec: Record "Bank Stmt. Import Setup Acb")
+    local procedure DeleteAttachedDocumentsOnAfterDeleteBankStmtImportSetupAcb(var Rec: Record "Bank Stmt. Import Setup Acb")
     var
         DocumentAttachment: Record "Document Attachment";
     begin
